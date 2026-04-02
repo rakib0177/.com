@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD RAKIBUL ISLAM - Premium Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-heavy: rgba(255, 255, 255, 0.12);
+            --border: rgba(2, 32, 255, 0.608);
+            --accent: #00f2fe;
+            --income: #00ff88;
+            --expense: #ff4b2b;
+            --savings: #f9d423;
+            --gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #090909, #000);
+            color: #fff;
+            padding: 15px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 242, 254, 0.15);
+        }
+
+        /* Profile Styles */
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin-bottom: 12px;
+            object-fit: cover;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .date-display {
+            font-size: 13px;
+            color: var(--accent);
+            margin-top: 5px;
+            font-weight: 300;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 20px;
+        }
+
+        .social-links a {
+            color: #02fa6d;
+            transition: 0.4s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px) scale(1.2);
+        }
+
+        h2 {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Counters styling */
+        .counter-badge {
+            font-size: 15px;
+            background: var(--glass-heavy);
+            padding: 10px 150px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            color: #f8ef03;
+            margin-bottom: 10px;
+            display: inline-block;
+            background-color: #071313;
+        }
+
+        /* Search & Inputs */
+        .search-bar {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: 12px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: var(--accent);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            outline: none;
+            margin-bottom: 8px;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--gradient);
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #000;
+            width: 100%;
+            transition: 0.4s;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+        }
+
+        button:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Lists */
+        .list-container {
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item {
+            background: var(--glass-heavy);
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--accent);
+            transition: 0.3s;
+        }
+
+        .item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .done {
+            order: 2;
+            opacity: 0.4;
+            border-left-color: var(--income);
+            text-decoration: line-through;
+        }
+
+        .pending {
+            order: 1;
+        }
+
+        .item-text b {
+            display: block;
+            font-size: 14px;
+        }
+
+        .item-text small {
+            color: #aaa;
+            font-size: 11px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            font-size: 18px;
+        }
+
+        .btn-del {
+            color: var(--expense);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-del:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px var(--expense));
+        }
+
+        .btn-ok {
+            color: var(--income);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-ok:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px var(--income));
+        }
+
+        /* Stats */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .stat-item small {
+            font-size: 10px;
+            opacity: 0.7;
+            display: block;
+        }
+
+        .stat-item div {
+            font-weight: 600;
+            font-size: 15px;
+            margin-top: 3px;
+        }
+
+        .btn-clear-all {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 12px;
+            color: var(--expense);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .btn-clear-all:hover {
+            opacity: 1;
+        }
+
+        .chart-box {
+            height: 200px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card profile-section">
+            <img src="rakib.jpg" class="profile-img" alt="Rakib">
+            <div style="font-size: 20px; font-weight: 600; letter-spacing: 1px;">MD RAKIBUL ISLAM</div>
+            <div id="live-date" class="date-display">-- : -- : --</div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/18HmSnuWkL/"><i class="fab fa-facebook"></i></a>
+                <a href="https://t.me/traderrakib777"><i class="fab fa-telegram"></i></a>
+                <a href="https://wa.me/8801701860951"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-chart-area"></i> Savings Trend</h2>
+            <div class="chart-box"><canvas id="savingsChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <span class="btn-clear-all" onclick="resetData('savings')"><i class="fas fa-redo"></i> Reset</span>
+            <h2><i class="fas fa-piggy-bank" style="color:var(--savings)"></i> My Savings: <span id="view-savings"
+                    style="color:var(--savings)">0</span> TK</h2>
+            <div class="input-group">
+                <input type="number" id="sav-amt" placeholder="Enter Amount (TK)">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <button onclick="handleSavings('add')" style="background:var(--income)">Deposit</button>
+                    <button onclick="handleSavings('withdraw')"
+                        style="background:var(--expense); color:#fff">Withdraw</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="btn-clear-all" onclick="resetData('plans')">Clear All</span>
+            <h2><i class="fas fa-list-check"></i> Daily Plan</h2>
+            <div id="plan-counters" class="counter-badge">Pending: 0 | Done: 0</div>
+
+            <input type="text" class="search-bar" placeholder="🔍 Search plans..."
+                onkeyup="filterData('plan-list', this.value)">
+            <div class="input-group">
+                <input type="text" id="task-inp" placeholder="What's the plan for today?">
+                <button onclick="addPlan()"><i class="fas fa-plus-circle"></i> Add Task</button>
+            </div>
+            <div id="plan-list" class="list-container"></div>
+        </div>
+
+        <div class="card">
+            <span class="btn-clear-all" onclick="resetData('expenses')">Clear All</span>
+            <h2><i class="fas fa-file-invoice-dollar"></i> Daily Used</h2>
+            <input type="text" class="search-bar" placeholder="🔍 Search expenses..."
+                onkeyup="filterData('exp-list', this.value)">
+            <div class="stat-grid">
+                <div class="stat-item"><small>Today's Cost</small>
+                    <div id="view-d-exp">0</div>
+                </div>
+                <div class="stat-item"><small>Total Cost</small>
+                    <div id="view-t-exp">0</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="number" id="exp-amt" placeholder="Amount (TK)">
+                <input type="text" id="exp-res" placeholder="Reason">
+                <button onclick="addFinance('expense')" style="background:var(--expense); color:#fff">Submit
+                    Expense</button>
+            </div>
+            <div id="exp-list" class="list-container"></div>
+        </div>
+
+        <div class="card">
+            <span class="btn-clear-all" onclick="resetData('incomes')">Clear All</span>
+            <h2><i class="fas fa-hand-holding-usd"></i> Income Manager</h2>
+            <input type="text" class="search-bar" placeholder="🔍 Search income..."
+                onkeyup="filterData('inc-list', this.value)">
+            <div class="stat-grid">
+                <div class="stat-item"><small>Today's Income</small>
+                    <div id="view-d-inc">0</div>
+                </div>
+                <div class="stat-item"><small>Total Lifetime</small>
+                    <div id="view-t-inc">0</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="number" id="inc-amt" placeholder="Amount (TK)">
+                <input type="text" id="inc-res" placeholder="Source">
+                <button onclick="addFinance('income')" style="background:var(--income)">Submit Income</button>
+            </div>
+            <div id="inc-list" class="list-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Database
+        let data = JSON.parse(localStorage.getItem('rakib_db_v4')) || {
+            date: new Date().toLocaleDateString(),
+            savings: 0, sHistory: [0],
+            plans: [], expenses: [], incomes: [],
+            totalExp: 0, totalInc: 0, dExp: 0, dInc: 0
+        };
+
+        let chart;
+
+        function initChart() {
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.sHistory.map((_, i) => i),
+                    datasets: [{
+                        label: 'Balance',
+                        data: data.sHistory,
+                        borderColor: '#00f2fe',
+                        backgroundColor: 'rgba(0, 242, 254, 0.1)',
+                        fill: true, tension: 0.4, borderWidth: 3, pointRadius: 2
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function updateUI() {
+            // Clock
+            const now = new Date();
+            document.getElementById('live-date').innerText = now.toDateString() + " | " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            // Stats
+            document.getElementById('view-savings').innerText = data.savings.toLocaleString();
+            document.getElementById('view-d-exp').innerText = data.dExp.toLocaleString() + " TK";
+            document.getElementById('view-t-exp').innerText = data.totalExp.toLocaleString() + " TK";
+            document.getElementById('view-d-inc').innerText = data.dInc.toLocaleString() + " TK";
+            document.getElementById('view-t-inc').innerText = data.totalInc.toLocaleString() + " TK";
+
+            // Plan Counters
+            const doneCount = data.plans.filter(p => p.done).length;
+            const pendingCount = data.plans.length - doneCount;
+            document.getElementById('plan-counters').innerText = `Pending: ${pendingCount} | Done: ${doneCount}`;
+
+            renderPlans();
+            renderFinance('exp-list', data.expenses, 'expense');
+            renderFinance('inc-list', data.incomes, 'income');
+
+            chart.data.labels = data.sHistory.map((_, i) => i);
+            chart.data.datasets[0].data = data.sHistory;
+            chart.update();
+
+            localStorage.setItem('rakib_db_v4', JSON.stringify(data));
+        }
+
+        function handleSavings(type) {
+            const val = parseFloat(document.getElementById('sav-amt').value);
+            if (!val || val <= 0) return;
+            if (type === 'add') data.savings += val;
+            else {
+                if (val > data.savings) { alert("Insufficient Balance!"); return; }
+                data.savings -= val;
+            }
+            data.sHistory.push(data.savings);
+            document.getElementById('sav-amt').value = '';
+            updateUI();
+        }
+
+        function addPlan() {
+            const inp = document.getElementById('task-inp');
+            if (!inp.value) return;
+            data.plans.push({ text: inp.value, done: false, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+            inp.value = '';
+            updateUI();
+        }
+
+        function toggleTask(index) {
+            data.plans[index].done = !data.plans[index].done;
+            updateUI();
+        }
+
+        function deleteItem(index, listKey) {
+            if (listKey === 'plans') data.plans.splice(index, 1);
+            else if (listKey === 'expenses') {
+                const item = data.expenses.splice(index, 1)[0];
+                data.dExp -= item.amt; data.totalExp -= item.amt;
+            } else if (listKey === 'incomes') {
+                const item = data.incomes.splice(index, 1)[0];
+                data.dInc -= item.amt; data.totalInc -= item.amt;
+            }
+            updateUI();
+        }
+
+        function addFinance(type) {
+            const amtInp = document.getElementById(type === 'expense' ? 'exp-amt' : 'inc-amt');
+            const resInp = document.getElementById(type === 'expense' ? 'exp-res' : 'inc-res');
+            const val = parseFloat(amtInp.value);
+            if (!val || !resInp.value) return;
+
+            if (type === 'expense') {
+                data.dExp += val; data.totalExp += val;
+                data.expenses.push({ res: resInp.value, amt: val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+            } else {
+                data.dInc += val; data.totalInc += val;
+                data.incomes.push({ res: resInp.value, amt: val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+            }
+            amtInp.value = ''; resInp.value = '';
+            updateUI();
+        }
+
+        function renderPlans() {
+            const container = document.getElementById('plan-list');
+            container.innerHTML = data.plans.map((p, i) => `
+                <div class="item ${p.done ? 'done' : 'pending'}">
+                    <div class="item-text"><b>${p.text}</b><small>${p.time}</small></div>
+                    <div class="actions">
+                        <i class="fas fa-check-circle btn-ok" onclick="toggleTask(${i})"></i>
+                        <i class="fas fa-trash-alt btn-del" onclick="deleteItem(${i}, 'plans')"></i>
+                    </div>
+                </div>
+            `).reverse().join('');
+        }
+
+        function renderFinance(id, list, key) {
+            const container = document.getElementById(id);
+            container.innerHTML = list.map((item, i) => `
+                <div class="item" style="border-left-color: ${key === 'expense' ? 'var(--expense)' : 'var(--income)'}">
+                    <div class="item-text"><b>${item.res}: ${item.amt} TK</b><small>${item.time}</small></div>
+                    <i class="fas fa-trash-alt btn-del" onclick="deleteItem(${i}, '${key === 'expense' ? 'expenses' : 'incomes'}')"></i>
+                </div>
+            `).reverse().join('');
+        }
+
+        function filterData(id, query) {
+            const items = document.getElementById(id).getElementsByClassName('item');
+            const q = query.toLowerCase();
+            for (let item of items) {
+                item.style.display = item.innerText.toLowerCase().includes(q) ? "flex" : "none";
+            }
+        }
+
+        function resetData(key) {
+            if (!confirm("Clear this history?")) return;
+            if (key === 'plans') data.plans = [];
+            else if (key === 'expenses') { data.expenses = []; data.dExp = 0; data.totalExp = 0; }
+            else if (key === 'incomes') { data.incomes = []; data.dInc = 0; data.totalInc = 0; }
+            else if (key === 'savings') { data.savings = 0; data.sHistory = [0]; }
+            updateUI();
+        }
+
+        // Daily Logic
+        if (data.date !== new Date().toLocaleDateString()) {
+            data.date = new Date().toLocaleDateString();
+            data.dExp = 0; data.dInc = 0;
+            localStorage.setItem('rakib_db_v4', JSON.stringify(data));
+        }
+
+        window.onload = () => {
+            initChart();
+            updateUI();
+            setInterval(updateUI, 60000); // Update clock every min
+        };
+    </script>
+</body>
+
+</html>
