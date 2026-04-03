@@ -61,7 +61,6 @@
             box-shadow: 0 12px 40px rgba(0, 242, 254, 0.15);
         }
 
-        /* Profile Styles */
         .profile-section {
             text-align: center;
         }
@@ -112,20 +111,18 @@
             letter-spacing: 1px;
         }
 
-        /* Counters styling */
         .counter-badge {
             font-size: 15px;
-            background: var(--glass-heavy);
-            padding: 5px 70px;
+            background: #071313;
+            padding: 5px 15px;
             border-radius: 13px;
             border: 2px solid var(--border);
             color: #f8ef03;
             margin-bottom: 10px;
-            display: inline-block;
-            background-color: #071313;
+            display: block;
+            text-align: center;
         }
 
-        /* Search & Inputs */
         .search-bar {
             width: 100%;
             padding: 10px 15px;
@@ -136,12 +133,6 @@
             font-size: 13px;
             margin-bottom: 12px;
             outline: none;
-            transition: 0.3s;
-        }
-
-        .search-bar:focus {
-            border-color: var(--accent);
-            background: rgba(0, 0, 0, 0.4);
         }
 
         input {
@@ -155,10 +146,6 @@
             margin-bottom: 8px;
         }
 
-        input:focus {
-            border-color: var(--accent);
-        }
-
         button {
             background: var(--gradient);
             border: none;
@@ -169,20 +156,8 @@
             color: #000;
             width: 100%;
             transition: 0.4s;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
         }
 
-        button:hover {
-            filter: brightness(1.2);
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* Lists */
         .list-container {
             margin-top: 15px;
             max-height: 250px;
@@ -200,11 +175,17 @@
             justify-content: space-between;
             align-items: center;
             border-left: 5px solid var(--accent);
-            transition: 0.3s;
         }
 
-        .item:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .item-text b {
+            display: block;
+            font-size: 14px;
+        }
+
+        .item-text small {
+            color: #aaa;
+            font-size: 11px;
+            display: block;
         }
 
         .done {
@@ -216,16 +197,6 @@
 
         .pending {
             order: 1;
-        }
-
-        .item-text b {
-            display: block;
-            font-size: 14px;
-        }
-
-        .item-text small {
-            color: #aaa;
-            font-size: 11px;
         }
 
         .actions {
@@ -240,23 +211,12 @@
             transition: 0.3s;
         }
 
-        .btn-del:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 5px var(--expense));
-        }
-
         .btn-ok {
             color: var(--income);
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn-ok:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 5px var(--income));
-        }
-
-        /* Stats */
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -272,18 +232,6 @@
             border-bottom: 2px solid var(--accent);
         }
 
-        .stat-item small {
-            font-size: 10px;
-            opacity: 0.7;
-            display: block;
-        }
-
-        .stat-item div {
-            font-weight: 600;
-            font-size: 15px;
-            margin-top: 3px;
-        }
-
         .btn-clear-all {
             position: absolute;
             right: 20px;
@@ -292,20 +240,13 @@
             color: var(--expense);
             cursor: pointer;
             opacity: 0.6;
-            transition: 0.3s;
-        }
-
-        .btn-clear-all:hover {
-            opacity: 1;
         }
 
         .chart-box {
             height: 200px;
             width: 100%;
-            margin-bottom: 10px;
         }
 
-        /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 4px;
         }
@@ -339,13 +280,11 @@
             <span class="btn-clear-all" onclick="resetData('savings')"><i class="fas fa-redo"></i> Reset</span>
             <h2><i class="fas fa-piggy-bank" style="color:var(--savings)"></i> My Savings: <span id="view-savings"
                     style="color:var(--savings)">0</span> TK</h2>
-            <div class="input-group">
-                <input type="number" id="sav-amt" placeholder="Enter Amount (TK)">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <button onclick="handleSavings('add')" style="background:var(--income)">Deposit</button>
-                    <button onclick="handleSavings('withdraw')"
-                        style="background:var(--expense); color:#fff">Withdraw</button>
-                </div>
+            <input type="number" id="sav-amt" placeholder="Enter Amount (TK)">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <button onclick="handleSavings('add')" style="background:var(--income)">Deposit</button>
+                <button onclick="handleSavings('withdraw')"
+                    style="background:var(--expense); color:#fff">Withdraw</button>
             </div>
         </div>
 
@@ -353,13 +292,10 @@
             <span class="btn-clear-all" onclick="resetData('plans')">Clear All</span>
             <h2><i class="fas fa-list-check"></i> Daily Plan</h2>
             <div id="plan-counters" class="counter-badge">Pending: 0 | Done: 0</div>
-
             <input type="text" class="search-bar" placeholder="🔍 Search plans..."
                 onkeyup="filterData('plan-list', this.value)">
-            <div class="input-group">
-                <input type="text" id="task-inp" placeholder="What's the plan for today?">
-                <button onclick="addPlan()"><i class="fas fa-plus-circle"></i> Add Task</button>
-            </div>
+            <input type="text" id="task-inp" placeholder="What's the plan for today?">
+            <button onclick="addPlan()"><i class="fas fa-plus-circle"></i> Add Task</button>
             <div id="plan-list" class="list-container"></div>
         </div>
 
@@ -376,12 +312,10 @@
                     <div id="view-t-exp">0</div>
                 </div>
             </div>
-            <div class="input-group">
-                <input type="number" id="exp-amt" placeholder="Amount (TK)">
-                <input type="text" id="exp-res" placeholder="Reason">
-                <button onclick="addFinance('expense')" style="background:var(--expense); color:#fff">Submit
-                    Expense</button>
-            </div>
+            <input type="number" id="exp-amt" placeholder="Amount (TK)">
+            <input type="text" id="exp-res" placeholder="Reason">
+            <button onclick="addFinance('expense')" style="background:var(--expense); color:#fff">Submit
+                Expense</button>
             <div id="exp-list" class="list-container"></div>
         </div>
 
@@ -398,18 +332,16 @@
                     <div id="view-t-inc">0</div>
                 </div>
             </div>
-            <div class="input-group">
-                <input type="number" id="inc-amt" placeholder="Amount (TK)">
-                <input type="text" id="inc-res" placeholder="Source">
-                <button onclick="addFinance('income')" style="background:var(--income)">Submit Income</button>
-            </div>
+            <input type="number" id="inc-amt" placeholder="Amount (TK)">
+            <input type="text" id="inc-res" placeholder="Source">
+            <button onclick="addFinance('income')" style="background:var(--income)">Submit Income</button>
             <div id="inc-list" class="list-container"></div>
         </div>
     </div>
 
     <script>
         // Database
-        let data = JSON.parse(localStorage.getItem('rakib_db_v4')) || {
+        let data = JSON.parse(localStorage.getItem('rakib_db_v6')) || {
             date: new Date().toLocaleDateString(),
             savings: 0, sHistory: [0],
             plans: [], expenses: [], incomes: [],
@@ -417,6 +349,11 @@
         };
 
         let chart;
+
+        // Notification Permission
+        if ("Notification" in window) {
+            if (Notification.permission !== "granted") Notification.requestPermission();
+        }
 
         function initChart() {
             const ctx = document.getElementById('savingsChart').getContext('2d');
@@ -443,19 +380,21 @@
             });
         }
 
+        function getFullStamp() {
+            const now = new Date();
+            return now.toLocaleDateString() + " " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
         function updateUI() {
-            // Clock
             const now = new Date();
             document.getElementById('live-date').innerText = now.toDateString() + " | " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            // Stats
             document.getElementById('view-savings').innerText = data.savings.toLocaleString();
             document.getElementById('view-d-exp').innerText = data.dExp.toLocaleString() + " TK";
             document.getElementById('view-t-exp').innerText = data.totalExp.toLocaleString() + " TK";
             document.getElementById('view-d-inc').innerText = data.dInc.toLocaleString() + " TK";
             document.getElementById('view-t-inc').innerText = data.totalInc.toLocaleString() + " TK";
 
-            // Plan Counters
             const doneCount = data.plans.filter(p => p.done).length;
             const pendingCount = data.plans.length - doneCount;
             document.getElementById('plan-counters').innerText = `Pending: ${pendingCount} | Done: ${doneCount}`;
@@ -468,7 +407,7 @@
             chart.data.datasets[0].data = data.sHistory;
             chart.update();
 
-            localStorage.setItem('rakib_db_v4', JSON.stringify(data));
+            localStorage.setItem('rakib_db_v6', JSON.stringify(data));
         }
 
         function handleSavings(type) {
@@ -487,7 +426,7 @@
         function addPlan() {
             const inp = document.getElementById('task-inp');
             if (!inp.value) return;
-            data.plans.push({ text: inp.value, done: false, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+            data.plans.push({ text: inp.value, done: false, time: getFullStamp() });
             inp.value = '';
             updateUI();
         }
@@ -497,30 +436,19 @@
             updateUI();
         }
 
-        function deleteItem(index, listKey) {
-            if (listKey === 'plans') data.plans.splice(index, 1);
-            else if (listKey === 'expenses') {
-                const item = data.expenses.splice(index, 1)[0];
-                data.dExp -= item.amt; data.totalExp -= item.amt;
-            } else if (listKey === 'incomes') {
-                const item = data.incomes.splice(index, 1)[0];
-                data.dInc -= item.amt; data.totalInc -= item.amt;
-            }
-            updateUI();
-        }
-
         function addFinance(type) {
             const amtInp = document.getElementById(type === 'expense' ? 'exp-amt' : 'inc-amt');
             const resInp = document.getElementById(type === 'expense' ? 'exp-res' : 'inc-res');
             const val = parseFloat(amtInp.value);
             if (!val || !resInp.value) return;
 
+            const timeStamp = getFullStamp();
             if (type === 'expense') {
                 data.dExp += val; data.totalExp += val;
-                data.expenses.push({ res: resInp.value, amt: val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+                data.expenses.push({ res: resInp.value, amt: val, time: timeStamp });
             } else {
                 data.dInc += val; data.totalInc += val;
-                data.incomes.push({ res: resInp.value, amt: val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+                data.incomes.push({ res: resInp.value, amt: val, time: timeStamp });
             }
             amtInp.value = ''; resInp.value = '';
             updateUI();
@@ -549,6 +477,22 @@
             `).reverse().join('');
         }
 
+        function deleteItem(index, listKey) {
+            if (!confirm("Are you sure?")) return;
+            // logic to update totals when deleting
+            const reversedIndex = data[listKey].length - 1 - index;
+            if (listKey === 'expenses') {
+                const item = data.expenses.splice(reversedIndex, 1)[0];
+                data.dExp -= item.amt; data.totalExp -= item.amt;
+            } else if (listKey === 'incomes') {
+                const item = data.incomes.splice(reversedIndex, 1)[0];
+                data.dInc -= item.amt; data.totalInc -= item.amt;
+            } else {
+                data.plans.splice(reversedIndex, 1);
+            }
+            updateUI();
+        }
+
         function filterData(id, query) {
             const items = document.getElementById(id).getElementsByClassName('item');
             const q = query.toLowerCase();
@@ -566,17 +510,28 @@
             updateUI();
         }
 
+        function checkPendingTasks() {
+            const pending = data.plans.filter(p => !p.done);
+            if (pending.length > 0 && Notification.permission === "granted") {
+                new Notification("Journal Alert!", {
+                    body: `Rakib, you have ${pending.length} pending plans for today!`,
+                    icon: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png"
+                });
+            }
+        }
+
         // Daily Logic
         if (data.date !== new Date().toLocaleDateString()) {
             data.date = new Date().toLocaleDateString();
             data.dExp = 0; data.dInc = 0;
-            localStorage.setItem('rakib_db_v4', JSON.stringify(data));
+            localStorage.setItem('rakib_db_v6', JSON.stringify(data));
         }
 
         window.onload = () => {
             initChart();
             updateUI();
-            setInterval(updateUI, 60000); // Update clock every min
+            setInterval(updateUI, 60000);
+            setInterval(checkPendingTasks, 15 * 60 * 1000); // 15 mins
         };
     </script>
 </body>
