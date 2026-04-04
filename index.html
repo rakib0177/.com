@@ -4,22 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD RAKIBUL ISLAM - Premium Dashboard</title>
+    <title> RAKIBUL ISLAM - Royal Golden web</title>
+
+    <link rel="icon" type="image/jpg" href="rakib.jpg">
+    <link rel="apple-touch-icon" href="rakib.jpg">
+
+    <meta name="description" content="Official Personal Dashboard of MD RAKIBUL ISLAM">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-heavy: rgba(255, 255, 255, 0.12);
-            --border: rgba(2, 32, 255, 0.608);
-            --accent: #00f2fe;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-heavy: rgba(255, 255, 255, 0.08);
+            --gold: #d4af37;
+            --gold-light: #f9d423;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --income: #00ff88;
             --expense: #ff4b2b;
-            --savings: #f9d423;
-            --gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.9);
+            --gold-glow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
         * {
@@ -30,7 +36,7 @@
         }
 
         body {
-            background: radial-gradient(circle at top, #090909, #000);
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
             color: #fff;
             padding: 15px;
             min-height: 100vh;
@@ -45,41 +51,42 @@
 
         .card {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
             padding: 22px;
             margin-bottom: 20px;
             position: relative;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 242, 254, 0.15);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
         }
 
         .profile-section {
             text-align: center;
+            border: 1px solid var(--gold);
+            box-shadow: var(--gold-glow);
         }
 
         .profile-img {
             width: 90px;
             height: 90px;
             border-radius: 50%;
-            border: 3px solid var(--accent);
-            margin-bottom: 12px;
+            border: 2px solid var(--gold);
+            margin-bottom: 10px;
             object-fit: cover;
-            box-shadow: 0 0 15px var(--accent);
+            box-shadow: 0 0 15px var(--gold);
         }
 
         .date-display {
             font-size: 13px;
-            color: var(--accent);
+            color: var(--gold-light);
             margin-top: 5px;
-            font-weight: 300;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         .social-links {
@@ -91,73 +98,105 @@
         }
 
         .social-links a {
-            color: #02fa6d;
-            transition: 0.4s;
+            color: #fff;
+            transition: 0.3s;
         }
 
         .social-links a:hover {
-            color: var(--accent);
-            transform: translateY(-3px) scale(1.2);
+            color: var(--gold-light);
+            transform: scale(1.3);
+            text-shadow: 0 0 10px var(--gold);
         }
 
         h2 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 15px;
-            color: var(--accent);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            gap: 8px;
         }
 
-        .counter-badge {
-            font-size: 15px;
-            background: #071313;
-            padding: 5px 15px;
-            border-radius: 13px;
-            border: 2px solid var(--border);
-            color: #f8ef03;
-            margin-bottom: 10px;
-            display: block;
-            text-align: center;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(0, 0, 0, 0.2);
-            color: #fff;
-            font-size: 13px;
-            margin-bottom: 12px;
-            outline: none;
-        }
-
+        /* Input & Search Styling */
+        .search-bar,
         input {
             width: 100%;
             padding: 12px;
             border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             color: #fff;
+            margin-bottom: 10px;
             outline: none;
-            margin-bottom: 8px;
+            transition: 0.3s;
         }
 
+        .search-bar:focus,
+        input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Button Glow & Hover */
         button {
-            background: var(--gradient);
+            background: var(--gold-gradient);
             border: none;
             padding: 14px;
             border-radius: 12px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             color: #000;
             width: 100%;
-            transition: 0.4s;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            letter-spacing: 1px;
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Specific Button Colors */
+        .btn-withdraw {
+            background: #1a1a1a !important;
+            color: var(--gold) !important;
+            border: 1px solid var(--gold) !important;
+        }
+
+        .btn-withdraw:hover {
+            background: var(--gold) !important;
+            color: #000 !important;
+        }
+
+        .btn-expense {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c) !important;
+            color: #fff !important;
+        }
+
+        .btn-expense:hover {
+            box-shadow: 0 8px 25px rgba(255, 75, 43, 0.4);
+        }
+
+        .btn-income {
+            background: linear-gradient(135deg, #00ff88, #00bd68) !important;
+            color: #000 !important;
+        }
+
+        .btn-income:hover {
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+        }
+
+        /* List Items */
         .list-container {
             margin-top: 15px;
             max-height: 250px;
@@ -169,82 +208,80 @@
 
         .item {
             background: var(--glass-heavy);
-            padding: 15px;
-            border-radius: 15px;
+            padding: 12px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 5px solid var(--accent);
+            border-left: 3px solid var(--gold);
+            transition: 0.3s;
+        }
+
+        .item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .item.done {
+            opacity: 0.4;
+            text-decoration: line-through;
+            border-left-color: var(--income);
         }
 
         .item-text b {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
+            color: var(--gold-light);
         }
 
         .item-text small {
             color: #aaa;
-            font-size: 11px;
+            font-size: 10px;
             display: block;
-        }
-
-        .done {
-            order: 2;
-            opacity: 0.4;
-            border-left-color: var(--income);
-            text-decoration: line-through;
-        }
-
-        .pending {
-            order: 1;
-        }
-
-        .actions {
-            display: flex;
-            gap: 15px;
-            font-size: 18px;
-        }
-
-        .btn-del {
-            color: var(--expense);
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-ok {
-            color: var(--income);
-            cursor: pointer;
-            transition: 0.3s;
+            margin-top: 2px;
         }
 
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 15px;
         }
 
         .stat-item {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             padding: 12px;
-            border-radius: 15px;
+            border-radius: 12px;
             text-align: center;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .stat-item div {
+            font-weight: 600;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+        }
+
+        .chart-box {
+            height: 180px;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .btn-clear-all {
             position: absolute;
             right: 20px;
             top: 20px;
-            font-size: 12px;
+            font-size: 10px;
             color: var(--expense);
             cursor: pointer;
-            opacity: 0.6;
+            font-weight: 600;
+            opacity: 0.7;
         }
 
-        .chart-box {
-            height: 200px;
-            width: 100%;
+        .btn-clear-all:hover {
+            opacity: 1;
+            text-shadow: 0 0 5px var(--expense);
         }
 
         ::-webkit-scrollbar {
@@ -252,7 +289,7 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border);
+            background: var(--gold);
             border-radius: 10px;
         }
     </style>
@@ -262,8 +299,9 @@
     <div class="container">
         <div class="card profile-section">
             <img src="rakib.jpg" class="profile-img" alt="Rakib">
-            <div style="font-size: 20px; font-weight: 600; letter-spacing: 1px;">MD RAKIBUL ISLAM</div>
-            <div id="live-date" class="date-display">-- : -- : --</div>
+            <div style="font-size: 20px; font-weight: 600; color: var(--gold); letter-spacing: 1px;">MD RAKIBUL ISLAM
+            </div>
+            <div id="live-date" class="date-display">-- / -- / --</div>
             <div class="social-links">
                 <a href="https://www.facebook.com/share/18HmSnuWkL/"><i class="fab fa-facebook"></i></a>
                 <a href="https://t.me/traderrakib777"><i class="fab fa-telegram"></i></a>
@@ -272,101 +310,94 @@
         </div>
 
         <div class="card">
-            <h2><i class="fas fa-chart-area"></i> Savings Trend</h2>
+            <h2><i class="fas fa-chart-line"></i> Savings Growth</h2>
             <div class="chart-box"><canvas id="savingsChart"></canvas></div>
         </div>
 
         <div class="card">
-            <span class="btn-clear-all" onclick="resetData('savings')"><i class="fas fa-redo"></i> Reset</span>
-            <h2><i class="fas fa-piggy-bank" style="color:var(--savings)"></i> My Savings: <span id="view-savings"
-                    style="color:var(--savings)">0</span> TK</h2>
-            <input type="number" id="sav-amt" placeholder="Enter Amount (TK)">
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <button onclick="handleSavings('add')" style="background:var(--income)">Deposit</button>
-                <button onclick="handleSavings('withdraw')"
-                    style="background:var(--expense); color:#fff">Withdraw</button>
+            <span class="btn-clear-all" onclick="resetData('savings')">RESET</span>
+            <h2><i class="fas fa-wallet"></i> Balance: <span id="view-savings" style="color:var(--gold-light)">0</span>
+                TK</h2>
+            <input type="number" id="sav-amt" placeholder="Enter Amount">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                <button onclick="handleSavings('add')">Deposit</button>
+                <button onclick="handleSavings('withdraw')" class="btn-withdraw">Withdraw</button>
             </div>
         </div>
 
         <div class="card">
-            <span class="btn-clear-all" onclick="resetData('plans')">Clear All</span>
-            <h2><i class="fas fa-list-check"></i> Daily Plan</h2>
-            <div id="plan-counters" class="counter-badge">Pending: 0 | Done: 0</div>
-            <input type="text" class="search-bar" placeholder="🔍 Search plans..."
-                onkeyup="filterData('plan-list', this.value)">
-            <input type="text" id="task-inp" placeholder="What's the plan for today?">
-            <button onclick="addPlan()"><i class="fas fa-plus-circle"></i> Add Task</button>
+            <span class="btn-clear-all" onclick="resetData('plans')">CLEAR ALL</span>
+            <h2><i class="fas fa-crown"></i> Royal Masterplan</h2>
+            <input type="text" class="search-bar" placeholder="🔍 Search your goals..."
+                onkeyup="filterList('plan-list', this.value)">
+            <input type="text" id="task-inp" placeholder="Set a new royal goal...">
+            <button onclick="addPlan()">Add Goal</button>
             <div id="plan-list" class="list-container"></div>
         </div>
 
         <div class="card">
-            <span class="btn-clear-all" onclick="resetData('expenses')">Clear All</span>
-            <h2><i class="fas fa-file-invoice-dollar"></i> Daily Used</h2>
-            <input type="text" class="search-bar" placeholder="🔍 Search expenses..."
-                onkeyup="filterData('exp-list', this.value)">
+            <span class="btn-clear-all" onclick="resetData('expenses')">CLEAR</span>
+            <h2><i class="fas fa-minus-circle"></i> Expenses</h2>
             <div class="stat-grid">
-                <div class="stat-item"><small>Today's Cost</small>
+                <div class="stat-item"><small>Today</small>
                     <div id="view-d-exp">0</div>
                 </div>
-                <div class="stat-item"><small>Total Cost</small>
+                <div class="stat-item"><small>Total</small>
                     <div id="view-t-exp">0</div>
                 </div>
             </div>
+            <input type="text" class="search-bar" placeholder="🔍 Search expenses..."
+                onkeyup="filterList('exp-list', this.value)">
             <input type="number" id="exp-amt" placeholder="Amount (TK)">
-            <input type="text" id="exp-res" placeholder="Reason">
-            <button onclick="addFinance('expense')" style="background:var(--expense); color:#fff">Submit
-                Expense</button>
+            <input type="text" id="exp-res" placeholder="Reason/Description">
+            <button onclick="addFinance('expense')" class="btn-expense">Record Expense</button>
             <div id="exp-list" class="list-container"></div>
         </div>
 
         <div class="card">
-            <span class="btn-clear-all" onclick="resetData('incomes')">Clear All</span>
-            <h2><i class="fas fa-hand-holding-usd"></i> Income Manager</h2>
-            <input type="text" class="search-bar" placeholder="🔍 Search income..."
-                onkeyup="filterData('inc-list', this.value)">
+            <span class="btn-clear-all" onclick="resetData('incomes')">CLEAR</span>
+            <h2><i class="fas fa-plus-circle"></i> Revenue</h2>
             <div class="stat-grid">
-                <div class="stat-item"><small>Today's Income</small>
+                <div class="stat-item"><small>Today</small>
                     <div id="view-d-inc">0</div>
                 </div>
-                <div class="stat-item"><small>Total Lifetime</small>
+                <div class="stat-item"><small>Lifetime</small>
                     <div id="view-t-inc">0</div>
                 </div>
             </div>
+            <input type="text" class="search-bar" placeholder="🔍 Search income..."
+                onkeyup="filterList('inc-list', this.value)">
             <input type="number" id="inc-amt" placeholder="Amount (TK)">
             <input type="text" id="inc-res" placeholder="Source">
-            <button onclick="addFinance('income')" style="background:var(--income)">Submit Income</button>
+            <button onclick="addFinance('income')" class="btn-income">Record Income</button>
             <div id="inc-list" class="list-container"></div>
         </div>
     </div>
 
     <script>
-        // Database
-        let data = JSON.parse(localStorage.getItem('rakib_db_v6')) || {
-            date: new Date().toLocaleDateString(),
-            savings: 0, sHistory: [0],
-            plans: [], expenses: [], incomes: [],
-            totalExp: 0, totalInc: 0, dExp: 0, dInc: 0
+        let data = JSON.parse(localStorage.getItem('rakib_final_v10')) || {
+            savings: 0, sHistory: [0], plans: [], expenses: [], incomes: [],
+            totalExp: 0, totalInc: 0, dExp: 0, dInc: 0,
+            lastDate: new Date().toLocaleDateString()
         };
 
-        let chart;
-
-        // Notification Permission
-        if ("Notification" in window) {
-            if (Notification.permission !== "granted") Notification.requestPermission();
-        }
+        let myChart;
 
         function initChart() {
             const ctx = document.getElementById('savingsChart').getContext('2d');
-            chart = new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.sHistory.map((_, i) => i),
                     datasets: [{
-                        label: 'Balance',
                         data: data.sHistory,
-                        borderColor: '#00f2fe',
-                        backgroundColor: 'rgba(0, 242, 254, 0.1)',
-                        fill: true, tension: 0.4, borderWidth: 3, pointRadius: 2
+                        borderColor: '#d4af37',
+                        borderWidth: 3,
+                        fill: true,
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#d4af37'
                     }]
                 },
                 options: {
@@ -374,126 +405,51 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         x: { display: false },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 10 } } }
+                        y: { ticks: { color: '#d4af37', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                     }
                 }
             });
         }
 
-        function getFullStamp() {
-            const now = new Date();
-            return now.toLocaleDateString() + " " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        }
-
         function updateUI() {
             const now = new Date();
-            document.getElementById('live-date').innerText = now.toDateString() + " | " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('live-date').innerText = now.toLocaleDateString('en-GB') + " | " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             document.getElementById('view-savings').innerText = data.savings.toLocaleString();
-            document.getElementById('view-d-exp').innerText = data.dExp.toLocaleString() + " TK";
-            document.getElementById('view-t-exp').innerText = data.totalExp.toLocaleString() + " TK";
-            document.getElementById('view-d-inc').innerText = data.dInc.toLocaleString() + " TK";
-            document.getElementById('view-t-inc').innerText = data.totalInc.toLocaleString() + " TK";
+            document.getElementById('view-d-exp').innerText = data.dExp.toLocaleString();
+            document.getElementById('view-t-exp').innerText = data.totalExp.toLocaleString();
+            document.getElementById('view-d-inc').innerText = data.dInc.toLocaleString();
+            document.getElementById('view-t-inc').innerText = data.totalInc.toLocaleString();
 
-            const doneCount = data.plans.filter(p => p.done).length;
-            const pendingCount = data.plans.length - doneCount;
-            document.getElementById('plan-counters').innerText = `Pending: ${pendingCount} | Done: ${doneCount}`;
+            renderList('plan-list', data.plans, 'plan');
+            renderList('exp-list', data.expenses, 'expense');
+            renderList('inc-list', data.incomes, 'income');
 
-            renderPlans();
-            renderFinance('exp-list', data.expenses, 'expense');
-            renderFinance('inc-list', data.incomes, 'income');
-
-            chart.data.labels = data.sHistory.map((_, i) => i);
-            chart.data.datasets[0].data = data.sHistory;
-            chart.update();
-
-            localStorage.setItem('rakib_db_v6', JSON.stringify(data));
-        }
-
-        function handleSavings(type) {
-            const val = parseFloat(document.getElementById('sav-amt').value);
-            if (!val || val <= 0) return;
-            if (type === 'add') data.savings += val;
-            else {
-                if (val > data.savings) { alert("Insufficient Balance!"); return; }
-                data.savings -= val;
+            if (myChart) {
+                myChart.data.labels = data.sHistory.map((_, i) => i);
+                myChart.data.datasets[0].data = data.sHistory;
+                myChart.update();
             }
-            data.sHistory.push(data.savings);
-            document.getElementById('sav-amt').value = '';
-            updateUI();
+            localStorage.setItem('rakib_final_v10', JSON.stringify(data));
         }
 
-        function addPlan() {
-            const inp = document.getElementById('task-inp');
-            if (!inp.value) return;
-            data.plans.push({ text: inp.value, done: false, time: getFullStamp() });
-            inp.value = '';
-            updateUI();
-        }
-
-        function toggleTask(index) {
-            data.plans[index].done = !data.plans[index].done;
-            updateUI();
-        }
-
-        function addFinance(type) {
-            const amtInp = document.getElementById(type === 'expense' ? 'exp-amt' : 'inc-amt');
-            const resInp = document.getElementById(type === 'expense' ? 'exp-res' : 'inc-res');
-            const val = parseFloat(amtInp.value);
-            if (!val || !resInp.value) return;
-
-            const timeStamp = getFullStamp();
-            if (type === 'expense') {
-                data.dExp += val; data.totalExp += val;
-                data.expenses.push({ res: resInp.value, amt: val, time: timeStamp });
-            } else {
-                data.dInc += val; data.totalInc += val;
-                data.incomes.push({ res: resInp.value, amt: val, time: timeStamp });
-            }
-            amtInp.value = ''; resInp.value = '';
-            updateUI();
-        }
-
-        function renderPlans() {
-            const container = document.getElementById('plan-list');
-            container.innerHTML = data.plans.map((p, i) => `
-                <div class="item ${p.done ? 'done' : 'pending'}">
-                    <div class="item-text"><b>${p.text}</b><small>${p.time}</small></div>
-                    <div class="actions">
-                        <i class="fas fa-check-circle btn-ok" onclick="toggleTask(${i})"></i>
-                        <i class="fas fa-trash-alt btn-del" onclick="deleteItem(${i}, 'plans')"></i>
+        function renderList(id, list, type) {
+            const container = document.getElementById(id);
+            container.innerHTML = list.map((item, i) => `
+                <div class="item ${item.done ? 'done' : ''}">
+                    <div class="item-text">
+                        <b>${type === 'plan' ? item.text : item.res + ': ' + item.amt + ' TK'}</b>
+                        <small><i class="far fa-clock"></i> ${item.date} | ${item.time}</small>
+                    </div>
+                    <div style="display:flex; gap:12px; font-size: 16px;">
+                        ${type === 'plan' ? `<i class="fas fa-check-circle" style="color:var(--income); cursor:pointer" onclick="togglePlan(${i})"></i>` : ''}
+                        <i class="fas fa-trash-alt" style="color:var(--expense); cursor:pointer" onclick="deleteItem(${i}, '${type}')"></i>
                     </div>
                 </div>
             `).reverse().join('');
         }
 
-        function renderFinance(id, list, key) {
-            const container = document.getElementById(id);
-            container.innerHTML = list.map((item, i) => `
-                <div class="item" style="border-left-color: ${key === 'expense' ? 'var(--expense)' : 'var(--income)'}">
-                    <div class="item-text"><b>${item.res}: ${item.amt} TK</b><small>${item.time}</small></div>
-                    <i class="fas fa-trash-alt btn-del" onclick="deleteItem(${i}, '${key === 'expense' ? 'expenses' : 'incomes'}')"></i>
-                </div>
-            `).reverse().join('');
-        }
-
-        function deleteItem(index, listKey) {
-            if (!confirm("Are you sure?")) return;
-            // logic to update totals when deleting
-            const reversedIndex = data[listKey].length - 1 - index;
-            if (listKey === 'expenses') {
-                const item = data.expenses.splice(reversedIndex, 1)[0];
-                data.dExp -= item.amt; data.totalExp -= item.amt;
-            } else if (listKey === 'incomes') {
-                const item = data.incomes.splice(reversedIndex, 1)[0];
-                data.dInc -= item.amt; data.totalInc -= item.amt;
-            } else {
-                data.plans.splice(reversedIndex, 1);
-            }
-            updateUI();
-        }
-
-        function filterData(id, query) {
+        function filterList(id, query) {
             const items = document.getElementById(id).getElementsByClassName('item');
             const q = query.toLowerCase();
             for (let item of items) {
@@ -501,38 +457,74 @@
             }
         }
 
+        function handleSavings(type) {
+            const amt = parseFloat(document.getElementById('sav-amt').value);
+            if (!amt || amt <= 0) return;
+            if (type === 'add') data.savings += amt;
+            else { if (amt > data.savings) return alert("Low Balance!"); data.savings -= amt; }
+            data.sHistory.push(data.savings);
+            document.getElementById('sav-amt').value = ''; updateUI();
+        }
+
+        function addPlan() {
+            const inp = document.getElementById('task-inp');
+            if (!inp.value) return;
+            const now = new Date();
+            data.plans.push({
+                text: inp.value, done: false,
+                date: now.toLocaleDateString('en-GB'),
+                time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            });
+            inp.value = ''; updateUI();
+        }
+
+        function addFinance(type) {
+            const amtInp = document.getElementById(type === 'expense' ? 'exp-amt' : 'inc-amt');
+            const resInp = document.getElementById(type === 'expense' ? 'exp-res' : 'inc-res');
+            const amt = parseFloat(amtInp.value);
+            if (!amt || !resInp.value) return;
+            const now = new Date();
+            const newItem = {
+                res: resInp.value, amt: amt,
+                date: now.toLocaleDateString('en-GB'),
+                time: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+            if (type === 'expense') { data.dExp += amt; data.totalExp += amt; data.expenses.push(newItem); }
+            else { data.dInc += amt; data.totalInc += amt; data.incomes.push(newItem); }
+            amtInp.value = ''; resInp.value = ''; updateUI();
+        }
+
+        function togglePlan(i) {
+            const realIdx = data.plans.length - 1 - i;
+            data.plans[realIdx].done = !data.plans[realIdx].done;
+            updateUI();
+        }
+
+        function deleteItem(i, type) {
+            if (!confirm("Delete this record?")) return;
+            let list = type === 'plan' ? data.plans : (type === 'expense' ? data.expenses : data.incomes);
+            const realIdx = list.length - 1 - i;
+            const removed = list.splice(realIdx, 1)[0];
+            if (type === 'expense') { data.dExp -= removed.amt; data.totalExp -= removed.amt; }
+            if (type === 'income') { data.dInc -= removed.amt; data.totalInc -= removed.amt; }
+            updateUI();
+        }
+
         function resetData(key) {
-            if (!confirm("Clear this history?")) return;
-            if (key === 'plans') data.plans = [];
+            if (!confirm("Are you sure you want to reset?")) return;
+            if (key === 'savings') { data.savings = 0; data.sHistory = [0]; }
+            else if (key === 'plans') data.plans = [];
             else if (key === 'expenses') { data.expenses = []; data.dExp = 0; data.totalExp = 0; }
             else if (key === 'incomes') { data.incomes = []; data.dInc = 0; data.totalInc = 0; }
-            else if (key === 'savings') { data.savings = 0; data.sHistory = [0]; }
             updateUI();
         }
 
-        function checkPendingTasks() {
-            const pending = data.plans.filter(p => !p.done);
-            if (pending.length > 0 && Notification.permission === "granted") {
-                new Notification("Journal Alert!", {
-                    body: `Rakib, you have ${pending.length} pending plans for today!`,
-                    icon: "https://cdn-icons-png.flaticon.com/512/1048/1048953.png"
-                });
-            }
-        }
-
-        // Daily Logic
-        if (data.date !== new Date().toLocaleDateString()) {
-            data.date = new Date().toLocaleDateString();
+        if (data.lastDate !== new Date().toLocaleDateString()) {
             data.dExp = 0; data.dInc = 0;
-            localStorage.setItem('rakib_db_v6', JSON.stringify(data));
+            data.lastDate = new Date().toLocaleDateString();
         }
 
-        window.onload = () => {
-            initChart();
-            updateUI();
-            setInterval(updateUI, 60000);
-            setInterval(checkPendingTasks, 15 * 60 * 1000); // 15 mins
-        };
+        window.onload = () => { initChart(); updateUI(); };
     </script>
 </body>
 
